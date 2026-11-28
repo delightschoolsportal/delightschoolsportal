@@ -14,7 +14,9 @@ export const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
-// Keeps recent data on the device so the portal still works on a weak connection
+// Keeps recent data on the device so the portal still works on a weak connection.
+// The long-connection setting helps on networks that block the normal connection.
 export const db = initializeFirestore(app, {
+  experimentalAutoDetectLongPolling: true,
   localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() })
 });
