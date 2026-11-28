@@ -21,7 +21,6 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => onAuthStateChanged(auth, async (u) => {
-    setError("");
     if (!u) { setUser(null); setProfile(null); setLoading(false); return; }
     try {
       const snap = await getDoc(doc(db, "users", u.uid));
@@ -29,15 +28,15 @@ export function AuthProvider({ children }) {
       if (!validate(p)) {
         setError("Your account is not ready. Please contact the school office.");
         await signOut(auth); setUser(null); setProfile(null);
-      } else { setUser(u); setProfile(p); }
-    } catch {
-      setError("Could not load your account. Check your connection and try again.");
+      } else { setError(""); setUser(u); setProfile(p); }
+    } catch (e) {
+      setError("Could not load your account (" + (e.code || e.message) + ").");
       await signOut(auth);
     }
     setLoading(false);
   }), []);
 
-  const login = (email, pw) => signInWithEmailAndPassword(auth, email, pw);
+  const login = (email, pw) => { setError(""); return signInWithEmailAndPassword(auth, email, pw); };
   const logout = () => signOut(auth);
   return <Ctx.Provider value={{ user, profile, error, loading, login, logout }}>{children}</Ctx.Provider>;
 }
