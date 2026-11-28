@@ -13,7 +13,8 @@ export const firebaseConfig = {
 
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
-// Offline cache (IndexedDB) for weak connections
+
+// Keeps recent data on the device so the portal still works on a weak connection
 export const db = initializeFirestore(app, {
   localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() })
 });
