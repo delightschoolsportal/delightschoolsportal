@@ -65,8 +65,8 @@ export const STAFF_ROLES = {
   primary_class_teacher: "primary", secondary_subject_teacher: "secondary", secondary_form_master: "secondary"
 };
 
-// Makes numbers like DA/MAIN/PRI/2026/001
+// Makes numbers like DA/MAIN/2026/001 (Primary) or DS/NAS/2026/014 (Secondary)
 export function admissionNo(branchId, year, n) {
   const [pre, code] = branchId.split("_");
-  return `${pre === "PRI" ? "DA" : "DS"}/${code}/${pre}/${year}/${String(n).padStart(3, "0")}`;
+  return (pre === "PRI" ? "DA" : "DS") + "/" + code + "/" + year + "/" + String(n).padStart(3, "0");
 }
