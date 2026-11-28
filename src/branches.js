@@ -40,11 +40,24 @@ export const GRADES = [
   { min: 0,  grade: "F", remark: "Fail" }
 ];
 
-// Classes in each section
-export const CLASSES = {
-  primary: [["CRE","Creche"],["NU1","Nursery 1"],["NU2","Nursery 2"],["P1","Primary 1"],["P2","Primary 2"],["P3","Primary 3"],["P4","Primary 4"],["P5","Primary 5"],["P6","Primary 6"]],
-  secondary: [["JSS1","JSS 1"],["JSS2","JSS 2"],["JSS3","JSS 3"],["SS1","SS 1"],["SS2","SS 2"],["SS3","SS 3"]]
+// Arms for each group of classes. Add or remove arms here. Format: [code, name]
+export const ARMS = {
+  primary: [["A","A"],["B","B"],["C","C"]],
+  jss: [["A","A"],["B","B"],["C","C"]],
+  ss: [["HUM","Humanities"],["SCI","Sciences"]]
 };
+
+// Classes in each section. Format: [code, name, which arms it uses]
+export const LEVELS = {
+  primary: [["CRE","Creche","primary"],["NU1","Nursery 1","primary"],["NU2","Nursery 2","primary"],["P1","Primary 1","primary"],["P2","Primary 2","primary"],["P3","Primary 3","primary"],["P4","Primary 4","primary"],["P5","Primary 5","primary"],["P6","Primary 6","primary"]],
+  secondary: [["JSS1","JSS 1","jss"],["JSS2","JSS 2","jss"],["JSS3","JSS 3","jss"],["SS1","SS 1","ss"],["SS2","SS 2","ss"],["SS3","SS 3","ss"]]
+};
+
+// Full list of classes for a section, for example ["P4A", "Primary 4 A"]
+export function classOptions(section) {
+  return LEVELS[section].flatMap(([code, name, group]) =>
+    ARMS[group].map(([armCode, armName]) => [code + armCode, name + " " + armName]));
+}
 
 // Staff roles the Director can create, and where each can work
 export const STAFF_ROLES = {
