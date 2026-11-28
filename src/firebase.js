@@ -14,7 +14,11 @@ export const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
-// Simple, forgiving connection for weak or filtered networks
+// Online only: nothing is saved on the device
 export const db = initializeFirestore(app, {
-  experimentalForceLongPolling: true
+  experimentalAutoDetectLongPolling: true
 });
+
+// A second, separate login connection used only to create new staff logins,
+// so the Director stays signed in while doing it
+export const secondaryAuth = getAuth(initializeApp(firebaseConfig, "secondary"));
