@@ -16,12 +16,14 @@ function Placeholder({ title, note }) {
 
 export const Headteacher = () => <Placeholder title="Headteacher dashboard" note="Result approval and branch overview arrive later." />;
 export const Principal = () => <Placeholder title="Principal dashboard" note="Result approval and branch overview arrive later." />;
-export const Admissions = () => <Placeholder title="Admissions" note="Student registration arrives soon." />;
 export const Cashier = () => <Placeholder title="Cashier" note="Fees and receipts arrive later." />;
 export const ClassTeacher = () => <Placeholder title="Class teacher" note="Score entry arrives later." />;
 export const SubjectTeacher = () => <Placeholder title="Subject teacher" note="Score entry arrives later." />;
 export const FormMaster = () => <Placeholder title="Form master" note="Attendance and remarks arrive later." />;
 export const Student = () => <Placeholder title="Student / Parent" note="Fees, receipts and report cards arrive later." />;
+
+// The real registration page lives in its own file
+export { default as Admissions } from "./Admissions";
 
 export function Director() {
   const [scope, setScope] = useState("all");
